@@ -20,5 +20,14 @@ file.walkSync(path.join(__dirname, "projects"), function(folder, innerFolders, f
     }
 });
 
+gulp.task('serve', () => {
+    gulp.src('compiled')
+        .pipe(plugins.webserver({
+            port: 3000,
+        }));
+});
+
+gulp.task('projects:compile', projects);
+
 // Default Task
-gulp.task('default', projects);
+gulp.task('default', ['projects:compile', 'serve']);
